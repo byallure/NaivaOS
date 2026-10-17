@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naiva OS — A Thoughtful Desktop Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #09090b;
+            --card-bg: #121215;
+            --border: #27272a;
+            --border-hover: #3f3f46;
+            --text-main: #fafafa;
+            --text-muted: #a1a1aa;
+            --accent-bg: #27272a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 640px;
+        }
+
+        /* Top Bar Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-wrapper {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .icon-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fallback-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .brand-title {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .status-badge {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--accent-bg);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        /* Flat Card Style */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: border-color 0.15s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Hero / Logo Section */
+        .logo-display {
+            width: 100%;
+            max-height: 180px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .logo-display img {
+            max-width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        .teaser-bio {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .teaser-bio strong {
+            color: var(--text-main);
+        }
+
+        /* Download Section */
+        .download-box {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .download-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .download-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .btn-disabled {
+            background: var(--accent-bg);
+            color: var(--text-muted);
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: not-allowed;
+            user-select: none;
+        }
+
+        /* Links Grid */
+        .socials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .socials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-bg);
+            border-color: var(--border-hover);
+        }
+
+        .social-link span {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        /* Features List */
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .feature-label {
+            color: var(--text-muted);
+        }
+
+        .feature-val {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Footer Card */
+        .footer-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 16px 20px;
+            margin-bottom: 0;
+        }
+
+        .copy-email {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Toast Notification */
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--text-main);
+            color: var(--bg);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="brand-wrapper">
+                <div class="icon-wrapper">
+                    <img src="icon.png" alt="Naiva OS Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="fallback-text" style="display:none;">N</span>
+                </div>
+                <span class="brand-title">Naiva OS</span>
+            </div>
+            <span class="status-badge">In Development</span>
+        </header>
+
+        <!-- Main Teaser & Logo Card -->
+        <div class="card">
+            <div class="logo-display">
+                <img src="logo.png" alt="Naiva OS Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <h1 class="fallback-text" style="display:none; font-size: 24px; font-weight: 700; color: var(--text-main);">Naiva OS</h1>
+            </div>
+
+            <p class="teaser-bio">
+                Building a more thoughtful desktop experience. <strong>Meet Naiva OS.</strong>
+            </p>
+            <p class="teaser-bio">
+                Naiva OS is a Debian-based Linux distribution developed with a focus on a clean, polished, and beginner-friendly desktop environment out of the box.
+            </p>
+        </div>
+
+        <!-- Download Card -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Download & Releases</span>
+                <span class="status-badge">Target: v0.5</span>
+            </div>
+            <div class="download-box">
+                <div class="download-title">No released versions yet</div>
+                <div class="download-sub">The first public release is planned to be an early build (likely v0.5). Check back soon for ISO images!</div>
+                <div class="btn-disabled">
+                    <span>🔒 Download Unavailable</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specifications / Info -->
+        <div class="card">
+            <div class="card-header" style="margin-bottom: 14px;">
+                <span class="card-title">System Overview</span>
+                <span class="status-badge">Specs</span>
+            </div>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-label">Base Distribution</span>
+                    <span class="feature-val">Debian Linux</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-label">Target Audience</span>
+                    <span class="feature-val">Beginners & Desktop Users</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-label">Development Status</span>
+                    <span class="feature-val">Early Pre-Alpha</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-label">Primary Goal</span>
+                    <span class="feature-val">Clean & Thoughtful UX</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- External Links -->
+        <div class="socials-grid">
+            <a href="https://youtube.com/@NaivaOS" target="_blank" class="social-link">
+                YouTube <span>@NaivaOS</span>
+            </a>
+            <button class="social-link" onclick="copyText('naiva-os@zohomail.eu', 'Naiva OS email copied!')">
+                Contact <span>naiva-os@zohomail.eu</span>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="card footer-card">
+            <span>Developed by ByAllure</span>
+            <button class="copy-email" onclick="copyText('naiva-os@zohomail.eu', 'Email copied to clipboard!')">naiva-os@zohomail.eu</button>
+        </div>
+    </div>
+
+    <div id="toast">Copied to clipboard</div>
+
+    <script>
+        function copyText(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
